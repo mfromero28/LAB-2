@@ -1,4 +1,4 @@
 # LAB-2
-Daniel Oliveros
-Donald Pimienta
+Daniel Oliveros,
+Donald Pimienta,
 María Romero
