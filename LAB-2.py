@@ -1,10 +1,14 @@
 import math
 from typing import List, Dict, Tuple, Set
 import pandas as pd
+import folium
+import webbrowser
+import os
+
 #Bueno, les voy a comentar esto para que se entienda
 class Graph:
 
-    def _init_(self, n: int, directed: bool = False):
+    def __init__(self, n: int, directed: bool = False):
         self.n = n
         self.directed = directed
         self.L: List[List[Tuple[int, float]]] = [[] for _ in range(n)]  # esta es la lista de adyacencia (nodo, peso)
@@ -123,7 +127,7 @@ class Graph:
         return paths
 
     def display_airport_info(self, idx: int):
-        #esto es breve, mostrar la info en cuestion de un airport
+        #esto es breve, mostrar la info en cuestion, de un airport
         if idx in self.airport_data:
             info = self.airport_data[idx]
             print(f"Aeropuerto: {info['code']} - {info['name']}")
@@ -131,6 +135,61 @@ class Graph:
             print(f"Coordenadas: ({info['latitude']}, {info['longitude']})")
         else:
             print("Aeropuerto no encontrado.")
+
+    def create_map(self):
+        # Crear un mapa centrado en las coordenadas medias
+        avg_lat = sum(info['latitude'] for info in self.airport_data.values()) / self.n
+        avg_lon = sum(info['longitude'] for info in self.airport_data.values()) / self.n
+        mapa = folium.Map(location=[avg_lat, avg_lon], zoom_start=2)
+        
+        # Agregar marcadores para cada aeropuerto
+        for idx, info in self.airport_data.items():
+            folium.Marker(
+                location=[info['latitude'], info['longitude']],
+                popup=f"{info['code']} - {info['name']}, {info['city']}, {info['country']}",
+                icon=folium.Icon(color="blue")
+            ).add_to(mapa)
+        
+        # Guardar el mapa en un archivo HTML
+        mapa.save("mapa_aeropuertos.html")
+        print("El mapa se ha guardado como 'mapa_aeropuertos.html'.")
+    def show_shortest_path_on_map(self, start: int, end: int):
+        # Mostrar el camino mínimo entre dos aeropuertos en el mapa
+        paths = self.shortest_path(start)
+        if end not in paths:
+            print("No hay camino disponible entre estos aeropuertos.")
+            return
+
+        path_info = paths[end]
+        path = path_info[1]
+
+        mapa = folium.Map(location=[self.airport_data[start]['latitude'], self.airport_data[start]['longitude']], zoom_start=5)
+
+        for i in range(len(path) - 1):
+            u = path[i]
+            v = path[i + 1]
+            folium.Marker(
+                location=[self.airport_data[u]['latitude'], self.airport_data[u]['longitude']],
+                popup=f"{self.airport_data[u]['code']} - {self.airport_data[u]['name']}",
+                icon=folium.Icon(color="blue")
+            ).add_to(mapa)
+            folium.Marker(
+                location=[self.airport_data[v]['latitude'], self.airport_data[v]['longitude']],
+                popup=f"{self.airport_data[v]['code']} - {self.airport_data[v]['name']}",
+                icon=folium.Icon(color="blue")
+            ).add_to(mapa)
+            folium.PolyLine(
+                locations=[(self.airport_data[u]['latitude'], self.airport_data[u]['longitude']),
+                           (self.airport_data[v]['latitude'], self.airport_data[v]['longitude'])],
+                color="green"
+            ).add_to(mapa)
+
+        mapa.save("camino_minimo.html")
+        print("El camino mínimo se ha guardado como 'camino_minimo.html'.")
+        print(f"Distancia total: {path_info[0]:.2f} km")
+        webbrowser.open("camino_minimo.html")
+
+        
 
 # Haversine para el cálculo de distancias entre dos coordenadas geográficas(es rarito que pero si se puede usar)
 #grafics en progreso...
@@ -143,6 +202,43 @@ def haversine(lat1, lon1, lat2, lon2):
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c  # distancia en km
 
+# Agregar una función para mostrar el camino mínimo sobre el mapa
+def show_shortest_path_on_map(self, start: int, end: int):
+        paths = self.shortest_path(start)
+        if end not in paths:
+            print("No hay camino disponible entre estos aeropuertos.")
+            return
+        
+        path_info = paths[end]
+        path = path_info[1]
+
+        # Crear un mapa centrado en el primer aeropuerto
+        mapa = folium.Map(location=[self.airport_data[start]['latitude'], self.airport_data[start]['longitude']], zoom_start=5)
+        
+        # Agregar los marcadores y las líneas del camino
+        for i in range(len(path) - 1):
+            u = path[i]
+            v = path[i + 1]
+            folium.Marker(
+                location=[self.airport_data[u]['latitude'], self.airport_data[u]['longitude']],
+                popup=f"{self.airport_data[u]['code']} - {self.airport_data[u]['name']}",
+                icon=folium.Icon(color="blue")
+            ).add_to(mapa)
+            folium.Marker(
+                location=[self.airport_data[v]['latitude'], self.airport_data[v]['longitude']],
+                popup=f"{self.airport_data[v]['code']} - {self.airport_data[v]['name']}",
+                icon=folium.Icon(color="blue")
+            ).add_to(mapa)
+            folium.PolyLine(
+                locations=[(self.airport_data[u]['latitude'], self.airport_data[u]['longitude']),
+                           (self.airport_data[v]['latitude'], self.airport_data[v]['longitude'])],
+                color="green"
+            ).add_to(mapa)
+        
+        # Guardar el mapa en un archivo HTML
+        mapa.save("camino_minimo.html")
+        print("El camino mínimo se ha guardado como 'camino_minimo.html'.")
+        print(f"Distancia total: {path_info[0]:.2f} km")
 
 # Cargar el dataset de vuelos
 df = pd.read_csv('flights_final.csv')
@@ -201,7 +297,10 @@ while True:
     print("2. Encontrar el árbol de expansión mínima")
     print("3. Mostrar caminos mínimos desde un aeropuerto")
     print("4. Mostrar información de un aeropuerto")
-    print("5. Salir")
+    print("5. Mostrar mapa de aeropuertos")
+    print("6. Mostrar camino mínimo entre dos aeropuertos en el mapa")
+    print("7. Salir")
+
 
     opcion = int(input("Seleccione una opción: "))
 
@@ -215,11 +314,41 @@ while True:
                 print(f"Componente {i+1}: {len(component)} vértices")
 
     elif opcion == 2:
-        mst_weight, mst_edges = graph.find_MST()
-        print(f"Peso total del árbol de expansión mínima: {mst_weight:.2f} km")
-        print("Aristas del árbol de expansión mínima:")
-        for u, v, weight in mst_edges:
-            print(f"{u} - {v} : {weight:.2f} km")
+        connected, components = graph.is_connected()
+        if connected:
+            mst_weight, mst_edges = graph.find_MST()
+            print(f"Peso total del árbol de expansión mínima: {mst_weight:.2f} km")
+            print("Aristas del árbol de expansión mínima:")
+            for u, v, weight in mst_edges:
+                info_u = graph.airport_data[u]
+                info_v = graph.airport_data[v]
+                print(f"{info_u['code']} ({info_u['city']}) - {info_v['code']} ({info_v['city']}): {weight:.2f} km")
+        else:
+            print(f"El grafo no es conexo. Tiene {len(components)} componentes.")
+            for i, component in enumerate(components):
+                print(f"\nComponente {i+1} (con {len(component)} vértices):")
+                subgraph = Graph(len(component))
+                component_list = list(component)
+                
+                mapping = {old: new for new, old in enumerate(component_list)}
+                
+                # Agregar las aristas del subgrafo
+                for u in component:
+                    for v, weight in graph.L[u]:
+                        if v in component:
+                            subgraph.add_edge(mapping[u], mapping[v], 
+                                            graph.airport_data[u]['latitude'], graph.airport_data[u]['longitude'],
+                                            graph.airport_data[v]['latitude'], graph.airport_data[v]['longitude'])
+                            subgraph.add_airport_info(mapping[u], graph.airport_data[u])
+                            subgraph.add_airport_info(mapping[v], graph.airport_data[v])
+
+                # Calcular el MST de la componente
+                mst_weight, mst_edges = subgraph.find_MST()
+                print(f"Peso total del MST de la componente {i+1}: {mst_weight:.2f} km")
+                for u, v, weight in mst_edges:
+                    info_u = subgraph.airport_data[u]
+                    info_v = subgraph.airport_data[v]
+                    print(f"{info_u['code']} ({info_u['city']}) - {info_v['code']} ({info_v['city']}): {weight:.2f} km")
 
     elif opcion == 3:
         code = input("Ingrese el código del aeropuerto: ")
@@ -239,9 +368,23 @@ while True:
             graph.display_airport_info(airport_to_idx[code])
         else:
             print("Código de aeropuerto no encontrado.")
-    
+
     elif opcion == 5:
+        graph.create_map()
+
+    elif opcion == 6:
+        start_code = input("Ingrese el código del aeropuerto de origen: ")
+        end_code = input("Ingrese el código del aeropuerto de destino: ")
+        if start_code in airport_to_idx and end_code in airport_to_idx:
+            start = airport_to_idx[start_code]
+            end = airport_to_idx[end_code]
+            graph.show_shortest_path_on_map(start, end)
+        else:
+            print("Código de aeropuerto no encontrado.")
+    
+    elif opcion == 7:
         break
 
     else:
-        print("Opción no válida, por favor intente nuevamente.")
+        print("Opción no válida, por favor intente nuevamente.")        
+    

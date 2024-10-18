@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_87be038f3032c03ac98ecc9f1cf8c685 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_87be038f3032c03ac98ecc9f1cf8c685" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_87be038f3032c03ac98ecc9f1cf8c685 = L.map(
+                "map_87be038f3032c03ac98ecc9f1cf8c685",
+                {
+                    center: [4.70159, -74.1469],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_55d4c218b9203efb937d401c86c42303 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_55d4c218b9203efb937d401c86c42303.addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var marker_27dc96747bc37f4098e99e366ffac0b0 = L.marker(
+                [4.70159, -74.1469],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_e989b9d761098c961d5316e587c77e35 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_27dc96747bc37f4098e99e366ffac0b0.setIcon(icon_e989b9d761098c961d5316e587c77e35);
+        
+    
+        var popup_95b3f3fd31408a44ba4af776d097714f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_413f3f24d53c30c8e53ae3d08fc920b4 = $(`<div id="html_413f3f24d53c30c8e53ae3d08fc920b4" style="width: 100.0%; height: 100.0%;">BOG - El Dorado International Airport</div>`)[0];
+                popup_95b3f3fd31408a44ba4af776d097714f.setContent(html_413f3f24d53c30c8e53ae3d08fc920b4);
+            
+        
+
+        marker_27dc96747bc37f4098e99e366ffac0b0.bindPopup(popup_95b3f3fd31408a44ba4af776d097714f)
+        ;
+
+        
+    
+    
+            var marker_e32f1e7b0c965919ae1682281db35c24 = L.marker(
+                [18.56739998, -68.36340332],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_4f103f8507720cefda28ae9480936e5b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_e32f1e7b0c965919ae1682281db35c24.setIcon(icon_4f103f8507720cefda28ae9480936e5b);
+        
+    
+        var popup_3d296ce3fa80b40ceed47461c2d8ae99 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2e97f1ab5b2ece4963b5c3bd7853a43c = $(`<div id="html_2e97f1ab5b2ece4963b5c3bd7853a43c" style="width: 100.0%; height: 100.0%;">PUJ - Punta Cana International Airport</div>`)[0];
+                popup_3d296ce3fa80b40ceed47461c2d8ae99.setContent(html_2e97f1ab5b2ece4963b5c3bd7853a43c);
+            
+        
+
+        marker_e32f1e7b0c965919ae1682281db35c24.bindPopup(popup_3d296ce3fa80b40ceed47461c2d8ae99)
+        ;
+
+        
+    
+    
+            var poly_line_ab0eb1044c1bb566a981684ec10ba781 = L.polyline(
+                [[4.70159, -74.1469], [18.56739998, -68.36340332]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var marker_73e70a797cacd74ed382e63e0e693fea = L.marker(
+                [18.56739998, -68.36340332],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_8f7591999a1b905c031d89671722cd97 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_73e70a797cacd74ed382e63e0e693fea.setIcon(icon_8f7591999a1b905c031d89671722cd97);
+        
+    
+        var popup_eb423b5d7701fc0d8d74223437663861 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b9a70cf764f2bc3c46b63f572d143d32 = $(`<div id="html_b9a70cf764f2bc3c46b63f572d143d32" style="width: 100.0%; height: 100.0%;">PUJ - Punta Cana International Airport</div>`)[0];
+                popup_eb423b5d7701fc0d8d74223437663861.setContent(html_b9a70cf764f2bc3c46b63f572d143d32);
+            
+        
+
+        marker_73e70a797cacd74ed382e63e0e693fea.bindPopup(popup_eb423b5d7701fc0d8d74223437663861)
+        ;
+
+        
+    
+    
+            var marker_5469446c7a2df011404ba84aabcd57cc = L.marker(
+                [59.8003006, 30.26250076],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_f3a68e434cfe921d2201692abd06395a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_5469446c7a2df011404ba84aabcd57cc.setIcon(icon_f3a68e434cfe921d2201692abd06395a);
+        
+    
+        var popup_8eb4837e32a27dbb93df18918cc3de7d = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0c1d7712e051f2a452a5f1e91f70a20d = $(`<div id="html_0c1d7712e051f2a452a5f1e91f70a20d" style="width: 100.0%; height: 100.0%;">LED - Pulkovo Airport</div>`)[0];
+                popup_8eb4837e32a27dbb93df18918cc3de7d.setContent(html_0c1d7712e051f2a452a5f1e91f70a20d);
+            
+        
+
+        marker_5469446c7a2df011404ba84aabcd57cc.bindPopup(popup_8eb4837e32a27dbb93df18918cc3de7d)
+        ;
+
+        
+    
+    
+            var poly_line_60f3229c42a8e9b48249804a458cdecc = L.polyline(
+                [[18.56739998, -68.36340332], [59.8003006, 30.26250076]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var marker_2e68d59ae2a947635aa855db86d25b49 = L.marker(
+                [59.8003006, 30.26250076],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_18409c21e4960d612fa2412ce54141ff = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_2e68d59ae2a947635aa855db86d25b49.setIcon(icon_18409c21e4960d612fa2412ce54141ff);
+        
+    
+        var popup_801029abf71b0d7b844bef93ef681643 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_1e8e10fd622e8df95e0dd25798f0bc23 = $(`<div id="html_1e8e10fd622e8df95e0dd25798f0bc23" style="width: 100.0%; height: 100.0%;">LED - Pulkovo Airport</div>`)[0];
+                popup_801029abf71b0d7b844bef93ef681643.setContent(html_1e8e10fd622e8df95e0dd25798f0bc23);
+            
+        
+
+        marker_2e68d59ae2a947635aa855db86d25b49.bindPopup(popup_801029abf71b0d7b844bef93ef681643)
+        ;
+
+        
+    
+    
+            var marker_3e5acc3df978a9a68afd3404aba8323e = L.marker(
+                [56.172901, 92.493301],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_720112c94b8c4f5abc1cbf4cb6bc723c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_3e5acc3df978a9a68afd3404aba8323e.setIcon(icon_720112c94b8c4f5abc1cbf4cb6bc723c);
+        
+    
+        var popup_2bc1ce330aeb9fe9ad29a94d3ca1543c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0a14298955663370db454683ea2a211b = $(`<div id="html_0a14298955663370db454683ea2a211b" style="width: 100.0%; height: 100.0%;">KJA - Yemelyanovo Airport</div>`)[0];
+                popup_2bc1ce330aeb9fe9ad29a94d3ca1543c.setContent(html_0a14298955663370db454683ea2a211b);
+            
+        
+
+        marker_3e5acc3df978a9a68afd3404aba8323e.bindPopup(popup_2bc1ce330aeb9fe9ad29a94d3ca1543c)
+        ;
+
+        
+    
+    
+            var poly_line_5659c67784af0da2f178889245fee00c = L.polyline(
+                [[59.8003006, 30.26250076], [56.172901, 92.493301]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var marker_5347cb62cfc94bf56d19b3fa6675fdda = L.marker(
+                [56.172901, 92.493301],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_5cdf1306cd9518c3eeb1fe788080a2db = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_5347cb62cfc94bf56d19b3fa6675fdda.setIcon(icon_5cdf1306cd9518c3eeb1fe788080a2db);
+        
+    
+        var popup_ddf81570a2f520682becf7902cb01561 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_2d3b4ba3ec1e1409936ad3c5240b0953 = $(`<div id="html_2d3b4ba3ec1e1409936ad3c5240b0953" style="width: 100.0%; height: 100.0%;">KJA - Yemelyanovo Airport</div>`)[0];
+                popup_ddf81570a2f520682becf7902cb01561.setContent(html_2d3b4ba3ec1e1409936ad3c5240b0953);
+            
+        
+
+        marker_5347cb62cfc94bf56d19b3fa6675fdda.bindPopup(popup_ddf81570a2f520682becf7902cb01561)
+        ;
+
+        
+    
+    
+            var marker_01169ff6ac8e9507b815a0af3a106513 = L.marker(
+                [52.26800156, 104.3889999],
+                {}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+    
+            var icon_571c8f163eccc07a760f9326778d1550 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_01169ff6ac8e9507b815a0af3a106513.setIcon(icon_571c8f163eccc07a760f9326778d1550);
+        
+    
+        var popup_fa7c260dac90b13a5a33981145ee4c12 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_63a86f341ea5072eaeae7f10800d3799 = $(`<div id="html_63a86f341ea5072eaeae7f10800d3799" style="width: 100.0%; height: 100.0%;">IKT - Irkutsk Airport</div>`)[0];
+                popup_fa7c260dac90b13a5a33981145ee4c12.setContent(html_63a86f341ea5072eaeae7f10800d3799);
+            
+        
+
+        marker_01169ff6ac8e9507b815a0af3a106513.bindPopup(popup_fa7c260dac90b13a5a33981145ee4c12)
+        ;
+
+        
+    
+    
+            var poly_line_c9e94b07f6f0ebf0b4ec85ac12ed3ee6 = L.polyline(
+                [[56.172901, 92.493301], [52.26800156, 104.3889999]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_87be038f3032c03ac98ecc9f1cf8c685);
+        
+</script>
+</html>
