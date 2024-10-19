@@ -398,7 +398,25 @@ while True:
         if start_code in airport_to_idx and end_code in airport_to_idx:
             start = airport_to_idx[start_code]
             end = airport_to_idx[end_code]
-            graph.show_shortest_path_on_map(start, end)
+            # Obtener el camino más corto
+            paths = graph.shortest_path(start)
+            if end in paths:
+                path_info = paths[end]
+                path = path_info[1]
+
+                # Mostrar información de los aeropuertos en el camino
+                print("Camino mínimo:")
+                for idx in path:
+                    info = graph.airport_data[idx]
+                    print(f"Aeropuerto: {info['code']} - {info['name']}")
+                    print(f"Ciudad: {info['city']}, País: {info['country']}")
+                    print(f"Coordenadas: ({info['latitude']}, {info['longitude']})")
+                    print("-" * 40)
+
+                # Mostrar el camino en el mapa
+                graph.show_shortest_path_on_map(start, end)
+            else:
+                print("No hay camino disponible entre estos aeropuertos.")
         else:
             print("Código de aeropuerto no encontrado.")
     
