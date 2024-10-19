@@ -137,12 +137,20 @@ class Graph:
             print("Aeropuerto no encontrado.")
 
     def create_map(self):
-        # Crear un mapa centrado en las coordenadas medias
+        # Calcular el centro del mapa con las coordenadas medias
         avg_lat = sum(info['latitude'] for info in self.airport_data.values()) / self.n
         avg_lon = sum(info['longitude'] for info in self.airport_data.values()) / self.n
-        mapa = folium.Map(location=[avg_lat, avg_lon], zoom_start=2)
+        south_west = [-40, -160] 
+        north_east = [70, 160]    
+        mapa = folium.Map(location=[avg_lat, avg_lon], 
+                          zoom_start=5,
+                          max_zoom=10,
+                          min_zoom=3,
+                          max_bounds=True )
         
-        # Agregar marcadores para cada aeropuerto
+        mapa.fit_bounds([south_west, north_east]) #Limites del mapa
+
+        # Añadimos puntos o marcadores para los aeropuertos en el archivo
         for idx, info in self.airport_data.items():
             folium.Marker(
                 location=[info['latitude'], info['longitude']],
@@ -150,9 +158,15 @@ class Graph:
                 icon=folium.Icon(color="blue")
             ).add_to(mapa)
         
-        # Guardar el mapa en un archivo HTML
-        mapa.save("mapa_aeropuertos.html")
-        print("El mapa se ha guardado como 'mapa_aeropuertos.html'.")
+        # Guardamos el mapa en un archivo HTML
+        filename = "mapa_aeropuertos.html"
+        mapa.save(filename)
+        print(f"El mapa se ha guardado como '{filename}'.")
+
+        # Abrimos el archivo HTML 
+        filepath = os.path.abspath(filename)
+        webbrowser.open(f"file://{filepath}")
+
     def show_shortest_path_on_map(self, start: int, end: int):
         # Mostrar el camino mínimo entre dos aeropuertos en el mapa
         paths = self.shortest_path(start)
@@ -162,8 +176,14 @@ class Graph:
 
         path_info = paths[end]
         path = path_info[1]
-
-        mapa = folium.Map(location=[self.airport_data[start]['latitude'], self.airport_data[start]['longitude']], zoom_start=5)
+        
+        
+        mapa = folium.Map(location=[self.airport_data[start]['latitude'], self.airport_data[start]['longitude']], zoom_start=5,
+                          max_zoom=10,
+                          min_zoom=3,
+                          max_bounds=True)
+        
+        
 
         for i in range(len(path) - 1):
             u = path[i]
@@ -358,7 +378,7 @@ while True:
             # Mostrar los 10 caminos más largos
             top_10 = sorted(paths.items(), key=lambda x: x[1][0], reverse=True)[:10]
             for i, (v, (dist, path)) in enumerate(top_10, 1):
-                print(f"{i}. {graph.airport_data[v]['code']} - {graph.airport_data[v]['name']}: {dist:.2f} km")
+                print(f"{i}. {graph.airport_data[v]['code']} -- {graph.airport_data[v]['name']} -- COUNTRY :{graph.airport_data[v]['country']} -- CITY: {graph.airport_data[v]['city']} -- Latitude = ({graph.airport_data[v]['latitude']}) -- Longitude = ({graph.airport_data[v]['longitude']}) -- DISTANCE: {dist:.2f} km")
         else:
             print("Código de aeropuerto no encontrado.")
 
