@@ -205,7 +205,6 @@ class Graph:
             ).add_to(mapa)
 
         mapa.save("camino_minimo.html")
-        print("El camino mínimo se ha guardado como 'camino_minimo.html'.")
         print(f"Distancia total: {path_info[0]:.2f} km")
         webbrowser.open("camino_minimo.html")
 
