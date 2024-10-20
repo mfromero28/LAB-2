@@ -135,7 +135,7 @@ class Graph:
             print(f"Ciudad: {info['city']}, País: {info['country']}")
             print(f"Coordenadas: ({info['latitude']}, {info['longitude']})")
         else:
-            print("Aeropuerto no encontrado.")
+            print("El Aeropuerto ingresado no fue encontrado.")
 
     def create_map(self):
         # Calcular el centro del mapa con las coordenadas medias
