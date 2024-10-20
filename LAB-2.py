@@ -45,8 +45,9 @@ class Graph:
 
         def find(u):
             if parent[u] != u:
-                parent[u] = find(parent[u])
+                parent[u] = find(parent[u])  # Compresión de caminos
             return parent[u]
+
 #esto es un locuron para actualizar el rango, si no se puede hacer lo cambio y ya
         def union(u, v):
             root_u = find(u)
@@ -337,7 +338,7 @@ while True:
         if connected:
             mst_weight, mst_edges = graph.find_MST()
             print(f"Peso total del árbol de expansión mínima: {mst_weight:.2f} km")
-            print("Aristas del árbol de expansión mínima:")
+            print("Aristas del árbol de expansión mínima calculado:")
             for u, v, weight in mst_edges:
                 info_u = graph.airport_data[u]
                 info_v = graph.airport_data[v]
@@ -415,7 +416,7 @@ while True:
                 # Mostrar el camino en el mapa
                 graph.show_shortest_path_on_map(start, end)
             else:
-                print("No hay camino disponible entre estos aeropuertos.")
+                print("No hay rutas disponibles entre los aeropuertos seleccionados.")
         else:
             print("Código de aeropuerto no encontrado.")
     
