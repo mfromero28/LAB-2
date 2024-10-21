@@ -45,7 +45,7 @@ class Graph:
 
         def find(u):
             if parent[u] != u:
-                parent[u] = find(parent[u])  # Compresión de caminos
+                parent[u] = find(parent[u])  # caminos
             return parent[u]
 #esto es un locuron para actualizar el rango, si no se puede hacer lo cambio y ya
         def union(u, v):
@@ -94,7 +94,7 @@ class Graph:
 
     def shortest_path(self, start: int) -> Dict[int, Tuple[float, List[int]]]:
         #aqui vamos a implementar Dijkstra machi, eduardo dijo que no librerias que hicieran esto, usé heapq pero,
-        # eso es para optimizar la cola de prioridad en el algoritmo de Dijkstra :) digo yo que se vale
+        # eso es para optimizar y (NO CALCULA DIRECTAMENTE ESO) la cola de prioridad en el algoritmo de Dijkstra :) digo yo que se vale
         import heapq
         dist = {i: float('inf') for i in range(self.n)}
         dist[start] = 0
