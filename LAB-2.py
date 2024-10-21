@@ -47,7 +47,6 @@ class Graph:
             if parent[u] != u:
                 parent[u] = find(parent[u])  # Compresión de caminos
             return parent[u]
-
 #esto es un locuron para actualizar el rango, si no se puede hacer lo cambio y ya
         def union(u, v):
             root_u = find(u)
@@ -135,18 +134,18 @@ class Graph:
             print(f"Ciudad: {info['city']}, País: {info['country']}")
             print(f"Coordenadas: ({info['latitude']}, {info['longitude']})")
         else:
-            print("El Aeropuerto ingresado no fue encontrado.")
+            print("Aeropuerto no encontrado.")
 
     def create_map(self):
         # Calcular el centro del mapa con las coordenadas medias
         avg_lat = sum(info['latitude'] for info in self.airport_data.values()) / self.n
         avg_lon = sum(info['longitude'] for info in self.airport_data.values()) / self.n
-        south_west = [-40, -160] 
-        north_east = [70, 160]    
+        south_west = [-90, -200] 
+        north_east = [80, 180]    
         mapa = folium.Map(location=[avg_lat, avg_lon], 
-                          zoom_start=5,
+                          zoom_start=3,
                           max_zoom=10,
-                          min_zoom=3,
+                          min_zoom=2,
                           max_bounds=True )
         
         mapa.fit_bounds([south_west, north_east]) #Limites del mapa
@@ -181,10 +180,8 @@ class Graph:
         
         mapa = folium.Map(location=[self.airport_data[start]['latitude'], self.airport_data[start]['longitude']], zoom_start=5,
                           max_zoom=10,
-                          min_zoom=3,
+                          min_zoom=2,
                           max_bounds=True)
-        
-        
 
         for i in range(len(path) - 1):
             u = path[i]
@@ -279,7 +276,7 @@ for index, row in df.iterrows():
         airport_to_idx[dest_code] = current_idx
         current_idx += 1
 
-# Crear el grafo con el número total de aeropuertos(aun no se muestra,ok?)
+# Crear el grafo con el número total de aeropuertos(ya mejoró la vuelta,ok?)
 n_airports = len(airport_to_idx)
 graph = Graph(n_airports)
 
@@ -338,18 +335,19 @@ while True:
         if connected:
             mst_weight, mst_edges = graph.find_MST()
             print(f"Peso total del árbol de expansión mínima: {mst_weight:.2f} km")
-            print("Aristas del árbol de expansión mínima calculado:")
+            print("Aristas del árbol de expansión mínima:")
             for u, v, weight in mst_edges:
                 info_u = graph.airport_data[u]
                 info_v = graph.airport_data[v]
                 print(f"{info_u['code']} ({info_u['city']}) - {info_v['code']} ({info_v['city']}): {weight:.2f} km")
         else:
-            print(f"El grafo no es conexo. Tiene {len(components)} componentes.")
+            
             for i, component in enumerate(components):
                 print(f"\nComponente {i+1} (con {len(component)} vértices):")
+                # Crear el subgrafo para la componente
                 subgraph = Graph(len(component))
                 component_list = list(component)
-                
+
                 mapping = {old: new for new, old in enumerate(component_list)}
                 
                 # Agregar las aristas del subgrafo
@@ -365,11 +363,7 @@ while True:
                 # Calcular el MST de la componente
                 mst_weight, mst_edges = subgraph.find_MST()
                 print(f"Peso total del MST de la componente {i+1}: {mst_weight:.2f} km")
-                for u, v, weight in mst_edges:
-                    info_u = subgraph.airport_data[u]
-                    info_v = subgraph.airport_data[v]
-                    print(f"{info_u['code']} ({info_u['city']}) - {info_v['code']} ({info_v['city']}): {weight:.2f} km")
-
+                
     elif opcion == 3:
         code = input("Ingrese el código del aeropuerto: ")
         if code in airport_to_idx:
@@ -416,7 +410,7 @@ while True:
                 # Mostrar el camino en el mapa
                 graph.show_shortest_path_on_map(start, end)
             else:
-                print("No hay rutas disponibles entre los aeropuertos seleccionados.")
+                print("No hay camino disponible entre estos aeropuertos.")
         else:
             print("Código de aeropuerto no encontrado.")
     
